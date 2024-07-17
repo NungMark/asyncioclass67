@@ -16,9 +16,9 @@ class Toast:
 class Juice:
     pass
 
-async def pour_coffee():
+def pour_coffee():
     print(f"{time.ctime()} - Begin pour coffee...")
-    await asyncio.sleep(2)
+    time.sleep(2)
     print(f"{time.ctime()} - Finish pour coffee...")
     print(f"{time.ctime()} - >>>>>>>> Coffee is ready")
     return Coffee()
@@ -55,25 +55,29 @@ async def toast_bread(slices):
     print(f"{time.ctime()} - >>>>>>>> Toast are ready")
     return Toast()
 
-async def pour_juice():
+def pour_juice():
     print(f"{time.ctime()} - Begin pour juice...")
-    await asyncio.sleep(1)
+    time.sleep(1)
     print(f"{time.ctime()} - Finish pour juice...")
     return Juice()
 
 async def main():
-    coffee_task = asyncio.create_task(pour_coffee())
-    eggs_task = asyncio.create_task(fry_eggs(2))
+
     bacon_task = asyncio.create_task(fry_bacon())
     toast_task = asyncio.create_task(toast_bread(2))
+    egg_task = asyncio.create_task(fry_eggs(2))
+   
+    pour_coffee()
+    print(f"{time.ctime()} >>>>>>>> Coffee is ready\n")
 
-    await coffee_task
-    await eggs_task
+    await egg_task
     await bacon_task
     await toast_task
 
     print(f"{time.ctime()} - >>>>>>>> Nearly to finished...")
-    await pour_juice()
+    pour_juice()
+
+    
 
 if __name__ == "__main__":
     start_cooking = time.perf_counter()
