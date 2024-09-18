@@ -91,7 +91,7 @@ async def main():
     results = await asyncio.gather(customer_producer,*cashiers)
     
     for cashier in results[1:]:
-        if cashier:
+        if cashier: 
             print(f'The Cashier_{cashier['id']}'
                   f'take{cashier['customer']} - customers'
                   f'total {round(cashier['time'], ndigits=2)} secs')
